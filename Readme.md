@@ -145,9 +145,15 @@ Run `npm run prepare`\
 Run `npx husky add .husky/pre-push "npm test"` create a hook with test\
 Run `git add .husky/pre-push`\
 
-
 ## 4. `winston` 
 - winston is a logging library and we can log data in the richer and more structured way.\
 Run `npm install winston` to install the winston
+
+## 5. Travis CI 
+- continuous integration using travis-ci.
+Go to https://travis-ci.com and signup using your github account.\
+create .travis.yml file and add the travis ci configuration.
+
+
 
 
