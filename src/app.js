@@ -56,29 +56,24 @@ module.exports = (db) => {
         const values = [req.body.start_lat, req.body.start_long, req.body.end_lat, req.body.end_long, req.body.rider_name, req.body.driver_name, req.body.driver_vehicle]
 
         db.run('INSERT INTO Rides(startLat, startLong, endLat, endLong, riderName, driverName, driverVehicle) VALUES (?, ?, ?, ?, ?, ?, ?)', values, function (err) {
-            if (!err) 
-            {
-                db.all('SELECT * FROM Rides WHERE rideID = ?', this.lastID, (errs, rows) =>
-                {
-                    if (errs) {
-                        return res.send({
-                            error_code: 'SERVER_ERROR',
-                            message: 'Unknown error',
-                        })
-                    }
 
-                    return res.send(rows)
+            if (err) {
+                return res.send({
+                    error_code: 'SERVER_ERROR',
+                    message: 'Unknown error',
                 })
             }
 
-            return res.send({
-                error_code: 'SERVER_ERROR',
-                message: 'Unknown error',
+            db.all('SELECT * FROM Rides WHERE rideID = ?', this.lastID, (errs, rows) => {
+                if (errs) {
+                    return res.send({
+                        error_code: 'SERVER_ERROR',
+                        message: 'Unknown error',
+                    })
+                }
+
+                return res.send(rows)
             })
-        })
-        return res.send({
-            error_code: 'SERVER_ERROR',
-            message: 'Unknown error',
         })
     })
 
