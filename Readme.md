@@ -3,7 +3,7 @@ This is a basic project structure to help us to start building RESTful web APIs.
 
 This project aims to represent an rides APIs to validate / test the use-case of expressjs framework and other tools.
 
-# How to run this project
+### How to run this project
 - Go to root directory and
 - Run `npm install` Command
 - Then Run `npm start` Command for start this project
@@ -20,8 +20,8 @@ This project aims to represent an rides APIs to validate / test the use-case of 
 6. [Load Testing](#load-testing)
 
 
-### Documentation
-# Project Structure
+# Documentation
+## Project Structure
 - index.js : Responsible for connecting the database and starting the server.
 - app.js : Configure everything that has to do with Express application.
 - app.js : The goal of the app is to Handle the request, take the request data, queries and send back the response to the client. 
@@ -102,12 +102,12 @@ healthy
 ]
 ```
 
-### Implement Tooling
+# Implement Tooling
 
-1. `eslint and prettier` -
-# Using eslint and prettier, Prettier is used to autoformat the code to enforce an opinionated code format, ESLint makes sure to keep the code style in a good shape.
+## 1. `eslint and prettier` -
+ Using eslint and prettier, Prettier is used to autoformat the code to enforce an opinionated code format, ESLint makes sure to keep the code style in a good shape.
 
-## step to configure eslint and prettier:
+### step to configure eslint and prettier:
 
 Run `npm install eslint eslint-config-prettier eslint-plugin-prettier --save-dev`  - install eslint
 Run `npm init @eslint/config`  - It will create .eslintr.js file to configure linter
