@@ -144,3 +144,10 @@ Run `npm pkg set scripts.prepare="husky install"` to enable the git hook\
 Run `npm run prepare`\
 Run `npx husky add .husky/pre-push "npm test"` create a hook with test\
 Run `git add .husky/pre-push`\
+
+
+## 4. `winston` 
+- winston is a logging library and we can log data in the richer and more structured way.\
+Run `npm install winston` to install the winston
+
+
