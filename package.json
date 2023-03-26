@@ -10,7 +10,9 @@
     "test": "mocha tests",
     "start": "node index.js",
     "lint": "eslint **/*.js --fix",
-    "prettier-formate": "prettier --config .prettierrc **/*.js --write"
+    "prettier-formate": "prettier --config .prettierrc **/*.js --write",
+    "coverage": "nyc --reporter=lcov --reporter=text-summary npm test",
+    "prepare": "husky install"
   },
   "keywords": [
     "Xendit"
@@ -28,7 +30,9 @@
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.3",
     "mocha": "^6.1.4",
+    "nyc": "^15.1.0",
     "prettier": "2.8.7",
     "supertest": "^4.0.2"
   }

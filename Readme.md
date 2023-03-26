@@ -104,16 +104,16 @@ healthy
 
 # Implement Tooling
 
-## 1. `eslint and prettier` -
- Using eslint and prettier, Prettier is used to autoformat the code to enforce an opinionated code format, ESLint makes sure to keep the code style in a good shape.
+## 1. `eslint and prettier` 
+- Using eslint and prettier, Prettier is used to autoformat the code to enforce an opinionated code format, ESLint makes sure to keep the code style in a good shape.
 
 ### step to configure eslint and prettier:
 
-Run `npm install eslint eslint-config-prettier eslint-plugin-prettier --save-dev`  - install eslint
+Run `npm install eslint eslint-config-prettier eslint-plugin-prettier --save-dev`  to install eslint\
 Run `npm init @eslint/config`  - It will create .eslintr.js file to configure linter
 Create .eslintignoure file to ignoure the file from eslint
 
-Run `npm install --save-dev --save-exact prettier` - to install prettier 
+Run `npm install --save-dev --save-exact prettier` - to install prettier \
 Create the `.prettierrc` file to configure preettier:
 ```{
     "trailingComma": "es5",
@@ -125,5 +125,22 @@ Create the `.prettierrc` file to configure preettier:
 ```
 then add the lint and prettier-formate in package.json script
 
-Run `npm run lint` to run the code with eslinter
+Run `npm run lint` to run the code with eslinter\
 Run `npm run prettier-formate` to for prettier.
+
+## 2. `nyc` 
+- nyc generate test coverage reports to track how much of the application code is covered by unit tests.
+
+Run `npm install nyc --save-dev` to install nyc npm \
+Add `"coverage": "nyc --reporter=lcov --reporter=text-summary npm test"` in package.json script\
+nyc is setup to read the results from Mocha and it shows the % of cover.\
+Run `npm run coverage` it will run the test cases and generate the coverage file.
+
+## 3. `pre-push`
+- Using Husky we can use Git hooks more efficiently and run the scripts that need to work at various stages. we can run the test on git push.
+
+Run `npm install husky --save-dev`  to install the husky\
+Run `npm pkg set scripts.prepare="husky install"` to enable the git hook\
+Run `npm run prepare`\
+Run `npx husky add .husky/pre-push "npm test"` create a hook with test\
+Run `git add .husky/pre-push`\
