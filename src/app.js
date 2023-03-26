@@ -1,4 +1,5 @@
 const express = require('express')
+const logger = require('./utils/logger')
 
 const app = express()
 
@@ -57,6 +58,7 @@ module.exports = (db) => {
 
         db.run('INSERT INTO Rides(startLat, startLong, endLat, endLong, riderName, driverName, driverVehicle) VALUES (?, ?, ?, ?, ?, ?, ?)', values, function (err) {
             if (err) {
+                logger.error("Db error insert rides query")
                 return res.send({
                     error_code: 'SERVER_ERROR',
                     message: 'Unknown error',
@@ -65,6 +67,7 @@ module.exports = (db) => {
 
             db.all('SELECT * FROM Rides WHERE rideID = ?', this.lastID, (errs, rows) => {
                 if (errs) {
+                    logger.error("Db error get ride by lastId")
                     return res.send({
                         error_code: 'SERVER_ERROR',
                         message: 'Unknown error',
@@ -79,6 +82,7 @@ module.exports = (db) => {
     app.get('/rides', (req, res) => {
         db.all('SELECT * FROM Rides', (err, rows) => {
             if (err) {
+                logger.error("Db error get All rides query")
                 return res.send({
                     error_code: 'SERVER_ERROR',
                     message: 'Unknown error',
@@ -99,6 +103,7 @@ module.exports = (db) => {
     app.get('/rides/:id', (req, res) => {
         db.all(`SELECT * FROM Rides WHERE rideID='${req.params.id}'`, (err, rows) => {
             if (err) {
+                logger.error("Db error ride By Id query")
                 return res.send({
                     error_code: 'SERVER_ERROR',
                     message: 'Unknown error',
