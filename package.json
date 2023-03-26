@@ -12,7 +12,8 @@
     "lint": "eslint **/*.js --fix",
     "prettier-formate": "prettier --config .prettierrc **/*.js --write",
     "coverage": "nyc --reporter=lcov --reporter=text-summary npm test",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "test:load": "artillery run loadTest/artillery_loadTest.yml"
   },
   "keywords": [
     "Xendit"
@@ -20,9 +21,12 @@
   "author": "Bo",
   "license": "ISC",
   "dependencies": {
+    "artillery": "^2.0.0-31",
+    "artillery-plugin-expect": "^2.2.1",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.16.4",
+    "forever-monitor": "^3.0.3",
     "sqlite3": "^4.0.6",
     "winston": "^3.8.2"
   },
