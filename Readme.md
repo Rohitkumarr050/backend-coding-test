@@ -150,7 +150,9 @@ Run `git add .husky/pre-push`\
 Run `npm install winston` to install the winston
 
 ## 5. Travis CI 
-- 
+- continuous integration using travis-ci.
+Go to https://travis-ci.com and signup using your github account.\
+create .travis.yml file and add the travis ci configuration.
 
 
 
