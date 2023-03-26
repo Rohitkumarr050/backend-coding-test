@@ -6,8 +6,8 @@ const assert = require('assert')
 const sqlite3 = require('sqlite3').verbose()
 const db = new sqlite3.Database(':memory:')
 
-const app = require('../src/app')(db)
-const buildSchemas = require('../src/schemas')
+const app = require('../src/app');
+const buildSchemas = require('../src/models/schema/rideSchema');
 
 describe('API tests', () => {
     before((done) => {
@@ -115,16 +115,16 @@ describe('API tests', () => {
             }
 
             let res = await request(app).post('/rides').send(ride).expect('Content-Type', 'application/json; charset=utf-8')
-            assert.equal(res.body.length, 1, 'Expected Rides array')
-            //   assert.deepStrictEqual(res.body, [ride]);
+            let checkRideId = res.body.rideID && (res.body.rideID > 0)
+            
+            assert.deepStrictEqual(checkRideId, true, 'Expected Rides detail');
         })
     })
 
     describe('GET /rides with pagination', () => {
-
         it('it should validate pagination', async () => {
-            let res = await request(app).get('/rides')
-                .query({ page: 1})
+            let res = await request(app).get(`/rides`)
+                .query({ page: 1 })
                 .expect('Content-Type', 'application/json; charset=utf-8')
 
             if (res.body.hasOwnProperty('error_code')) {
@@ -133,7 +133,7 @@ describe('API tests', () => {
         })
 
         it('it should return the rides', async () => {
-            let res = await request(app).get('/rides')
+            let res = await request(app).get(`/rides`)
                 .query({ page: 1, limit: 10 })
                 .expect('Content-Type', 'application/json; charset=utf-8')
 
@@ -159,7 +159,7 @@ describe('API tests', () => {
             let res = await request(app)
                 .get('/rides/' + rideId)
                 .expect('Content-Type', 'application/json; charset=utf-8')
-            assert.equal(res.body.length, 1, 'Expected Rides array')
+            assert.equal(res.body.rideID, rideId, 'Expected Rides array')
         })
     })
 })
