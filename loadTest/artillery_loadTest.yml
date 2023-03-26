@@ -1,0 +1,51 @@
+config:
+  target: "http://localhost:8010"
+  phases:
+    - duration: 30
+      arrivalRate: 100
+      name: 100 rps
+  ensure:
+    p99: 50
+    maxErrorRate: 1
+  processor: "./processor.js"
+  plugin:
+    expect: {}
+scenarios:
+  - name: "Rides"
+    flow:
+      - post:
+          url: "/rides"
+          beforeRequest: generatePayload
+          json:
+            start_lat: "{{ start_lat }}"
+            start_long: "{{ start_long }}"
+            end_lat: "{{ end_lat }}"
+            end_long: "{{ end_long }}"
+            rider_name: "{{ rider_name }}"
+            driver_name: "{{ driver_name }}"
+            driver_vehicle: "{{ driver_vehicle }}"
+          capture:
+            - json: "$.rideID"
+              as: "rideID"
+            - json: "$.riderName"
+              as: "riderName"
+      # - log: "Received Id {{ rideID }} rideName for {{ riderName }}"
+      - think: 2
+      - get:
+          url: "/rides/{{ rideID }}"
+          capture:
+            - json: "$.riderName"
+              as: "riderName"
+      # - log: "Received rideName {{ riderName }} by Id {{ rideID }}"  
+      - think: 2
+      - get:
+          beforeRequest: getPagination
+          url: "/rides/?page={{ page }}&limit={{ limit }}"
+          capture:
+            - json: "$.length"
+              as: "RideCount"
+            - json: "$[0].rideID"
+              as: "rideID"
+      # - log: "Received Ride count {{ RideCount }} id {{ rideID }}"  
+      - think: 2
+

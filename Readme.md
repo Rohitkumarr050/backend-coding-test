@@ -173,3 +173,34 @@ create .travis.yml file and add the travis ci configuration.
 
 # security
 - using parameterized queries to prevent from SQL injection.
+
+# load-testing
+
+Run `npm install artillery` to install artillery npm
+Run `artillery-plugin-expect` to install expect plugin to compare the expected result with the actually received result.
+
+- create a `artillery_loadTest.yml` file with config.
+- specify the target url in config
+```
+config:
+  target: "https://localhost:8010"
+```
+- Phases in the config:- <br/>
+ `duration`: the time of one phase; <br/>
+ `arrivalRate`: the number of users added each second;<br/>
+ `name`: a name of the phases.
+
+```
+phases:
+    - duration: 30
+      arrivalRate: 100
+      name: 100 rps
+```
+- Scenario: <br/>
+1. All tests should be written in the scenarios section and should contain:
+2. GET, POST, PUT, DELETE, and some other commands; <br/>
+3. URL for every endpoint;<br/>
+4. The body text in JSON format;<br/>
+5. All checks you want to run.<br/>
+6. Javascript function can be call using `processor:` <bar/>
+7. call the function before request using `beforeRequest:` and after request using `afterRequest:`
