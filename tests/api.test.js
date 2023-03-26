@@ -159,7 +159,20 @@ describe('API tests', () => {
             let res = await request(app)
                 .get('/rides/' + rideId)
                 .expect('Content-Type', 'application/json; charset=utf-8')
-            assert.equal(res.body.rideID, rideId, 'Expected Rides array')
+            assert.equal(res.body.rideID, rideId, 'Expected Rides data')
         })
+    })
+
+    describe('GET /rides/:id test sql vulnerability', () => {
+        it('it should validate rideId', async () => {
+            let idWithQuery = '1; DROP TABLE Rides;'
+            let rideId = 1;
+
+            await request(app).get('/rides/' + idWithQuery).expect('Content-Type', 'application/json; charset=utf-8')
+
+            let res = await request(app).get('/rides/' + rideId).expect('Content-Type', 'application/json; charset=utf-8')
+            assert.equal(res.body.rideID, rideId, 'Expected Rides Data')
+        })
+
     })
 })

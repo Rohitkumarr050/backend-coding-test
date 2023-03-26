@@ -170,3 +170,6 @@ create .travis.yml file and add the travis ci configuration.
 - changes the callback with promise and async/await.
 - add try catch block for exception handling.
 - move the database connect seperate from index.js.
+
+# security
+- using parameterized queries to prevent from SQL injection.
