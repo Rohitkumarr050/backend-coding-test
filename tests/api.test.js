@@ -38,7 +38,7 @@ describe('API tests', () => {
         })
     })
 
-    describe('POST /rides', () => {
+    describe('POST /rides add Rides', () => {
         it('it should validate start_lat and start_long ', async () => {
             let ride = {
                 start_lat: -99.893997,
@@ -120,9 +120,22 @@ describe('API tests', () => {
         })
     })
 
-    describe('GET /rides', () => {
+    describe('GET /rides with pagination', () => {
+
+        it('it should validate pagination', async () => {
+            let res = await request(app).get('/rides')
+                .query({ page: 1})
+                .expect('Content-Type', 'application/json; charset=utf-8')
+
+            if (res.body.hasOwnProperty('error_code')) {
+                assert.equal(res.body.error_code, 'RIDES_NOT_FOUND_ERROR', 'Expected Ride not found Error')
+            }
+        })
+
         it('it should return the rides', async () => {
-            let res = await request(app).get('/rides').expect('Content-Type', 'application/json; charset=utf-8')
+            let res = await request(app).get('/rides')
+                .query({ page: 1, limit: 10 })
+                .expect('Content-Type', 'application/json; charset=utf-8')
 
             if (res.body.hasOwnProperty('error_code')) {
                 assert.equal(res.body.error_code, 'RIDES_NOT_FOUND_ERROR', 'Expected Ride not found Error')
