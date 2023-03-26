@@ -101,3 +101,29 @@ healthy
 }
 ]
 ```
+
+### Implement Tooling
+
+1. `eslint and prettier` -
+# Using eslint and prettier, Prettier is used to autoformat the code to enforce an opinionated code format, ESLint makes sure to keep the code style in a good shape.
+
+## step to configure eslint and prettier:
+
+Run `npm install eslint eslint-config-prettier eslint-plugin-prettier --save-dev`  - install eslint
+Run `npm init @eslint/config`  - It will create .eslintr.js file to configure linter
+Create .eslintignoure file to ignoure the file from eslint
+
+Run `npm install --save-dev --save-exact prettier` - to install prettier 
+Create the `.prettierrc` file to configure preettier:
+```{
+    "trailingComma": "es5",
+    "tabWidth": 4,
+    "semi": false,
+    "singleQuote": true,
+    "printWidth":200
+  }
+```
+then add the lint and prettier-formate in package.json script
+
+Run `npm run lint` to run the code with eslinter
+Run `npm run prettier-formate` to for prettier.
