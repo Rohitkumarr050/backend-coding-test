@@ -155,5 +155,6 @@ Go to https://travis-ci.com and signup using your github account.\
 create .travis.yml file and add the travis ci configuration.
 
 
-
-
+# implement-pagination
+- changes in the Rides api, get the page and limit in query string from client.\
+  `GET /rides/?page=1&limit=10`

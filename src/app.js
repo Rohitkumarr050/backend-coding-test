@@ -80,7 +80,13 @@ module.exports = (db) => {
     })
 
     app.get('/rides', (req, res) => {
-        db.all('SELECT * FROM Rides', (err, rows) => {
+        const { page, limit } = req.query
+        
+        const pageNo = page ? parseInt(page, 10) : 0
+        const limitN = limit ? parseInt(limit, 10) : 50
+        const offset = (pageNo - 1) * limitN
+
+        db.all(`SELECT * FROM Rides LIMIT ${limitN} OFFSET ${offset}`, (err, rows) => {
             if (err) {
                 logger.error("Db error get All rides query")
                 return res.send({
