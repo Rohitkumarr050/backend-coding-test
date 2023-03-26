@@ -150,7 +150,7 @@ Run `git add .husky/pre-push`\
 Run `npm install winston` to install the winston
 
 ## 5. Travis CI 
--
+- 
 
 
 
