@@ -24,8 +24,13 @@ This project aims to represent an rides APIs to validate / test the use-case of 
 ## Project Structure
 - index.js : Responsible for connecting the database and starting the server.
 - app.js : Configure everything that has to do with Express application.
-- app.js : The goal of the app is to Handle the request, take the request data, queries and send back the response to the client. 
-- schemas -> It contain the schemas of the rides.
+- config -> 
+    db : create database connection and register schema.
+- routes ->  The goal of the route is to take the request data and send to the correct handler function which will be in one of the controllers
+- controllers ->  Handle the application request, interact with models and send back the response to the client 
+- models ->
+   schema: It contain the all the schemas of the application.
+   models: Each model contain the queries related to feature.
 
 ## Usage
 The express server will be running at http://localhost:8010.
@@ -149,7 +154,7 @@ Run `git add .husky/pre-push`\
 - winston is a logging library and we can log data in the richer and more structured way.\
 Run `npm install winston` to install the winston
 
-## 5. Travis CI 
+## 5. `travis CI` 
 - continuous integration using travis-ci.
 Go to https://travis-ci.com and signup using your github account.\
 create .travis.yml file and add the travis ci configuration.
@@ -158,3 +163,10 @@ create .travis.yml file and add the travis ci configuration.
 # implement-pagination
 - changes in the Rides api, get the page and limit in query string from client.\
   `GET /rides/?page=1&limit=10`
+
+# refactoring
+- move the logic from app.js to seperate files.
+- create the seperate routes, controller and model for rides.
+- changes the callback with promise and async/await.
+- add try catch block for exception handling.
+- move the database connect seperate from index.js.
