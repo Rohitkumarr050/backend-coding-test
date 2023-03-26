@@ -125,5 +125,5 @@ Create the `.prettierrc` file to configure preettier:
 ```
 then add the lint and prettier-formate in package.json script
 
-Run `npm lint` to run the code with eslinter
-Run `npm prettier-formate` to for prettier.
+Run `npm run lint` to run the code with eslinter
+Run `npm run prettier-formate` to for prettier.
